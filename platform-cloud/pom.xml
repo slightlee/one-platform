@@ -6,7 +6,12 @@
 
     <groupId>com.one</groupId>
     <artifactId>platform-cloud</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>platform-service</module>
+        <module>platform-service-api</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

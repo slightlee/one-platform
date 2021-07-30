@@ -1,0 +1,19 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: platform-system
+
+knife4j:
+  enable: true       # 开启增强功能
+  production: false  # 是否生产环境 如果为true停用Knife4j文档
+  basic:
+    enable: true     # 开启Swagger的Basic认证功能,默认是false
+    username: test   # Basic认证用户名
+    password: test   # Basic认证密码
+  setting:  # 自定义footer 版本 >=3.0.2
+    enableFooter: false    # 禁用默认 footer显示
+    enableFooterCustom: true  # 自定义footer
+    # 自定义显示内容
+    footerCustomContent: Apache License 2.0 | Copyright  2021-[北京XX科技股份有限公司](https://xxx.com/)
