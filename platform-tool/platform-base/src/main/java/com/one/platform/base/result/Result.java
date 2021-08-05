@@ -163,7 +163,7 @@ public class Result<T> {
      * @返回Result
      */
     public static <T> Result<T> error() {
-        return new Result<>(ResultCodeEnum.ERROR, ResultCodeEnum.ERROR.msg);
+        return new Result<>(ResultCodeEnum.INTERNAL_SERVER_ERROR, ResultCodeEnum.INTERNAL_SERVER_ERROR.msg);
     }
 
     /**
@@ -174,7 +174,7 @@ public class Result<T> {
      * @返回Result
      */
     public static <T> Result<T> error(String msg) {
-        return new Result<>(ResultCodeEnum.ERROR, msg);
+        return new Result<>(ResultCodeEnum.INTERNAL_SERVER_ERROR, msg);
     }
 
 
@@ -218,8 +218,8 @@ public class Result<T> {
      * @param flag
      * @return <T>  T 响应数据
      */
-    public static <T> Result<T> result(boolean flag) {
-        return flag ? Result.success("操作成功") : Result.error("操作失败");
+    public static <T> Result<T> status(boolean flag) {
+        return flag ? Result.success(ResultCodeEnum.SUCCESS.getMsg()) : Result.error(ResultCodeEnum.FAILED.getMsg());
     }
 
 }

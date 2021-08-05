@@ -1,28 +1,25 @@
+package com.one.service.system.api.entity;
 
-package com.one.service.system.api.entity.dto;
-
+import com.one.mybatis.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 用户创建
+ * 用户表
  * </p>
+ *
+ * @author 明天
+ * @since 2021-08-04
  */
 @Data
-@ApiModel(value = "CreateUser对象", description = "创建用户时的对象")
-public class CreateUserDTO implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+@ApiModel(value="PlatformUser对象", description="用户表")
+public class PlatformUser extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty(value = "主键")
-    private Long id;
-
-    @ApiModelProperty(value = "租户id")
-    private Long tenantId;
 
     @ApiModelProperty(value = "账号")
     private String account;
@@ -33,19 +30,19 @@ public class CreateUserDTO implements Serializable {
     @ApiModelProperty(value = "昵称")
     private String nickname;
 
-    @ApiModelProperty(value = "姓名")
+    @ApiModelProperty(value = "真实姓名")
     private String realName;
 
-    @ApiModelProperty(value = "1 : 男，0 : 女， 2: 未知")
+    @ApiModelProperty(value = "1 男  0 女  2 未知")
     private String gender;
 
     @ApiModelProperty(value = "邮箱")
     private String email;
 
-    @ApiModelProperty(value = "手机号码")
+    @ApiModelProperty(value = "电话")
     private String mobile;
 
-    @ApiModelProperty(value = "用户状态 '0'禁用,'1' 启用, '2' 密码初次未修改")
+    @ApiModelProperty(value = "用户状态 0 启用 1 禁用")
     private Integer status;
 
     @ApiModelProperty(value = "头像")
@@ -53,5 +50,6 @@ public class CreateUserDTO implements Serializable {
 
     @ApiModelProperty(value = "备注")
     private String comments;
+
 
 }

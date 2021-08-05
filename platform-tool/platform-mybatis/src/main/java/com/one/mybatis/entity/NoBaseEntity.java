@@ -10,13 +10,14 @@ import java.time.LocalDateTime;
 
 /**
  *  基础类
- *  此 ID 为自增ID, 如果id 不为自增 不可继承 当前类
+ *  此 ID 为 分配ID(主键类型为Number(Long和Integer)或String)(since 3.3.0),
+ *  使用接口IdentifierGenerator的方法nextId(默认实现类为DefaultIdentifierGenerator雪花算法)
  */
 @Data
-public class BaseEntity implements Serializable {
+public class NoBaseEntity implements Serializable {
 
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     @ApiModelProperty(value = "租户id")

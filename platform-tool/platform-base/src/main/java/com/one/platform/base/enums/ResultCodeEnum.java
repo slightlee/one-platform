@@ -11,130 +11,66 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ResultCodeEnum {
 
-    /**
-     * 成功
-     */
+    // 2xx - 成功
     SUCCESS(200, "操作成功"),
 
-    /**
-     * 未登录/登录超时
-     */
-    UNAUTHORIZED(401, "登录超时"),
 
-    /**
-     * 账号密码尝试次数过多，被锁定
-     */
-    PASSWORD_TRY_MAX_ERROR(402, "密码尝试次数过多，账号已被锁定"),
+    // 3xx - 重定向
 
-    /**
-     * 没有权限
-     */
-    NO_PERMISSION(403, "当前用户无该接口权限"),
 
-    /**
-     * 操作失败
-     */
-    FAILED(410, "操作失败"),
+    // 4xx - 请求错误
+    BAD_REQUEST(400, "错误请求"),
+    UNAUTHORIZED(401, "未授权"),
+    FORBIDDEN(403,"服务器拒绝请求"),
+    NOT_FOUND(404,"未找到"),
+    METHOD_NOT_ALLOWED(405,"客户端请求中的方法被禁止"),
 
-    /**
-     * 参数错误
-     */
-    PARAM_ERROR(411, "参数错误"),
 
-    /**
-     * 参数错误-已存在
-     */
-    INVALID_PARAM_EXIST(412, "请求参数已存在"),
+    // 5xx - 服务器错误
+    INTERNAL_SERVER_ERROR(500,"服务器内部错误"),
+    NOT_IMPLEMENTED(501,"尚未实施"),
+    BAD_GATEWAY(502,"错误网关"),
+    SERVICE_UNAVAILABLE(503,"服务不可用"),
+    GATEWAY_TIME_OUT(504,"网关超时"),
+    HTTP_VERSION_NOT_SUPPORTED(505,"HTTP 版本不受支持"),
 
-    /**
-     * 参数错误
-     */
-    INVALID_PARAM_EMPTY(413, "请求参数为空"),
 
-    /**
-     * 参数错误
-     */
-    PARAM_TYPE_MISMATCH(414, "参数类型不匹配"),
+    // 操作失败
+    FAILED(9001, "操作失败"),
 
-    /**
-     * 参数错误
-     */
-    PARAM_VALID_ERROR(415, "参数校验失败"),
 
-    /**
-     * 参数错误
-     */
-    ILLEGAL_REQUEST(416, "非法请求"),
+    // 业务
 
-    /**
-     * 验证码错误
-     */
-    INVALID_CAPTCHA_TYPE(417, "验证码类型不匹配"),
+    //--- 权限验证返回码 1xxx ---
+    TOKEN_INVALID(1001,"凭证无效"),
+    PLAYAUTH_FAIL(1002,"获取凭证失败"),
+    ACCOUNT_PASSWORD_IS_NULL(1003,"账号或密码为空"),
+    ACCOUNT_NOT_EXIST(1004,"账号不存在"),
+    PASSWORD_CHECK_FAIL(1005,"密码校验失败"),
+    LOGIN_FAIL(1006,"登录失败"),
+    ACCOUNT_DISABLE(1007,"账号被禁用"),
+    UN_AUTHORISE(1008,"权限不足"),
+    UN_AUTHENTICATED(1009,"您还未登录"),
+    UN_AUTHORIZED(1010, "暂未登录或token已经过期"),
+    UN_FIND_USER(1011, "找不到该用户"),
+    PHONE_CODE_IS_NULL(1012,"手机号或验证码为空"),
+    PHONE_IS_NOT_EXSIT(1013,"手机号不存在"),
 
-    /**
-     * 验证码错误
-     */
-    INVALID_CAPTCHA(418, "验证码错误"),
 
-    /**
-     * 用户名或密码错误
-     */
-    INVALID_USERNAME_PASSWORD(419, "账号或密码错误"),
+    //---操作数据返回码  3xxx ----
+    ADD_FAIL(3001,"添加失败"),
+    UPDATE_FAIL(3002,"修改失败"),
+    DELETE_FAIL(3003,"删除失败"),
+    SEND_FAIL(3004,"发送失败"),
+    QUERY_FAIL(3005,"查询失败"),
+    DATA_IS_EXIST(3007,"数据已存在"),
+    FEIGN_GET_DATA_FAIL(3006,"FEIGN调用接口获取数据失败"),
 
-    /**
-     *
-     */
-    INVALID_RE_PASSWORD(420, "两次输入密码不一致"),
 
-    /**
-     * 用户名或密码错误
-     */
-    INVALID_OLD_PASSWORD(421, "旧密码错误"),
-
-    /**
-     * 用户名重复
-     */
-    USERNAME_ALREADY_IN(422, "用户名已存在"),
-
-    /**
-     * 用户不存在
-     */
-    INVALID_USERNAME(423, "用户名不存在"),
-
-    /**
-     * 角色不存在
-     */
-    INVALID_ROLE(424, "角色不存在"),
-
-    /**
-     * 角色不存在
-     */
-    ROLE_USED(425, "角色使用中，不可删除"),
-
-    /**
-     * 已开启租户模式，未在请求中查询到租户信息
-     */
-    TENANT_NOT_FOUND(426, "已开启租户模式，未在请求中查询到租户信息"),
-
-    /**
-     * 密码错误次数超过最大限值，请选择验证码模式登录
-     */
-    INVALID_PASSWORD_CAPTCHA(427, "密码错误次数超过最大限值，请进行安全认证"),
-
-    /**
-     * 用户不存在
-     */
-    DISABLED_ACCOUNT(428, "账号已被禁用"),
-
-    /**
-     * 系统繁忙，请稍后重试
-     */
-    SYSTEM_BUSY(429, "系统繁忙，请稍后重试"),
-
-    /**
-     * 系统错误
-     */
-    ERROR(500, "系统错误");
+    // ----参数-----  4xxx ---
+    ILLEGAL_PARAMETER(4001,"参数不合法"),
+    OLD_PASSWORD_ERROR(4002, "旧密码错误"),
+    FILE_FORMAT_IS_ERROR(4003,"请上传指定格式的文件");
 
     /**
      * 错误类型码

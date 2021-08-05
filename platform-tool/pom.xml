@@ -11,6 +11,7 @@
     <modules>
         <module>platform-base</module>
         <module>platform-mybatis</module>
+        <module>platform-boot</module>
     </modules>
 
     <properties>
@@ -27,6 +28,13 @@
         <knife4j.version>3.0.2</knife4j.version>
         <!-- mybatis-plus -->
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <!-- mybatis-plus-generator -->
+        <mybatis-plus-generator.version>3.4.1</mybatis-plus-generator.version>
+        <!-- velocity -->
+        <velocity-version>2.3</velocity-version>
+        <!-- freemarker -->
+        <freemarker.version>2.3.31</freemarker.version>
+
     </properties>
 
 

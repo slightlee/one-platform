@@ -3,13 +3,12 @@ package com.one.service.system.controller;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
-import com.one.platform.base.enums.ResultCodeEnum;
 import com.one.platform.base.result.Result;
 import com.one.platform.base.util.BeanCopierUtils;
-import com.one.service.system.api.entity.User;
-import com.one.service.system.api.entity.dto.CreateUserDTO;
+import com.one.service.system.api.entity.PlatformUser;
+import com.one.service.system.api.entity.dto.AddUserDTO;
 import com.one.service.system.api.entity.dto.UpdateUserDTO;
-import com.one.service.system.service.UserService;
+import com.one.service.system.service.PlatformUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -19,15 +18,23 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+/**
+ * <p>
+ * 用户表 前端控制器
+ * </p>
+ *
+ * @author 明天
+ * @since 2021-08-04
+ */
 @RestController
-@RequestMapping(value = "user")
+@RequestMapping("/platform-user")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-@Api(tags = "UserController|用户相关前端控制器")
+@Api(tags = "用户相关")
 @ApiSupport(order = 10)
-public class UserController {
+public class PlatformUserController {
 
-    private final UserService userService;
+
+    private final PlatformUserService userService;
 
     /**
      * 用户列表
@@ -35,8 +42,8 @@ public class UserController {
     @GetMapping("/list")
     @ApiOperation(value = "用户列表")
     @ApiOperationSupport(order = 1)
-    public Result<List<User>> list() {
-        List<User> list = userService.list();
+    public Result<List<PlatformUser>> list() {
+        List<PlatformUser> list = userService.list();
         return Result.data(list);
     }
 
@@ -47,15 +54,10 @@ public class UserController {
     @PostMapping("/create")
     @ApiOperation(value = "添加用户")
     @ApiOperationSupport(order =2)
-    public Result create(@RequestBody CreateUserDTO createUserDTO) {
+    public Result create(@RequestBody AddUserDTO addUserDTO) {
 
-        User user = BeanCopierUtils.copyByClass(createUserDTO, User.class);
-        boolean result = userService.save(user);
-        if (result) {
-            return Result.success();
-        } else {
-            return Result.error(ResultCodeEnum.FAILED);
-        }
+        PlatformUser user = BeanCopierUtils.copyByClass(addUserDTO, PlatformUser.class);
+        return Result.status(userService.save(user));
     }
 
     /**
@@ -66,15 +68,12 @@ public class UserController {
     @ApiOperationSupport(order = 3)
     public Result update(@RequestBody UpdateUserDTO updateUserDTO) {
 
-        User user = BeanCopierUtils.copyByClass(updateUserDTO, User.class);
-        boolean result = userService.updateById(user);
-        if (result) {
-            return Result.success();
-        } else {
-            return Result.error(ResultCodeEnum.FAILED);
-        }
+        PlatformUser user = BeanCopierUtils.copyByClass(updateUserDTO, PlatformUser.class);
+        return Result.status(userService.updateById(user));
     }
 
+
+    // TODO 待完善 增加校验
     /**
      * 删除用户
      */
@@ -86,12 +85,8 @@ public class UserController {
         if (null == userId) {
             return Result.error("用户ID不能为空");
         }
-        boolean result = userService.removeById(userId);
-        if (result) {
-            return Result.success();
-        } else {
-            return Result.error(ResultCodeEnum.FAILED);
-        }
+        return Result.status(userService.removeById(userId));
     }
 
 }
+
