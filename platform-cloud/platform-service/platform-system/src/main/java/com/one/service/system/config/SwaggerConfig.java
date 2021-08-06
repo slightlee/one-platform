@@ -32,21 +32,18 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
 
-        String groupName="1.0.0 版本";
-
         return new Docket(DocumentationType.OAS_30)
 
                 // 添加 自定义 footer
                 .extensions(openApiExtensionResolver.buildSettingExtensions())
-                // 添加 自定义文档
-                .groupName(groupName)
-                .extensions(openApiExtensionResolver.buildExtensions(groupName))
 
                 .apiInfo(apiInfo())
                 .select()
+                //指定接口包所在路径
 //                .apis(RequestHandlerSelectors.basePackage("com.one.service.system"))
-//                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))  //指定接口包所在路径
-                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))  //方法上面有@ApiOperation注解 生成接口文档
+//                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+                //方法上面有@ApiOperation注解 生成接口文档
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
                 .build();
     }

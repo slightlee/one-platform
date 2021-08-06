@@ -1,0 +1,23 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: platform-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: false            # gateway关闭服务注册和发现
+          lowerCaseServiceId: true  # 请求路径上的服务名配置为小写
+      routes:
+        - id: platform-system
+          uri: lb://platform-system
+          predicates:
+            - Path=/platform-system/**
+          filters:
+            - StripPrefix=1
+
