@@ -53,7 +53,6 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
         log.info("name:{},location:{}",name,location);
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName((routeMap.get(name) == null ? name : routeMap.get(name)));
-        swaggerResource.setName(name);
         swaggerResource.setLocation(location);
         swaggerResource.setSwaggerVersion("2.0");
         return swaggerResource;
